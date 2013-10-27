@@ -11,6 +11,7 @@ namespace TeaTimer
 	{
 		Dictionary<string, TimeSpan> teaOptions;
 		Thread countDownThread = null;
+		CountDown cd = null;
 
 		#region Constructors
 
@@ -66,11 +67,11 @@ namespace TeaTimer
 			teaOptions.Add ( 
 			                "Green Tea", 
 			                new TimeSpan (0, 0, 10) 
-			);
+			                );
 			teaOptions.Add ( 
 			                "Black Tea", 
 			                new TimeSpan (0, 0, 5) 
-			);
+			                );
 		}
 
 		/// <summary>
@@ -92,19 +93,20 @@ namespace TeaTimer
 		/// </summary>
 		/// <author>Alexandra Marin</author>
 		private void StartCountDown ()
-		{ 
+		{  
 			InfoLabel.StringValue = "";
 
 			//Get the time
 			string variety = TeaChoicesCombo.DataSource.ObjectValueForItem (TeaChoicesCombo, TeaChoicesCombo.SelectedIndex).ToString();
 			TimeSpan time = teaOptions[variety];
 
-			//Init a new counter
-			CountDown cd = new CountDown (time, CountdownLabel, InfoLabel);
-
 			//Close any running threads
-			if (countDownThread != null && countDownThread.IsAlive)
-				countDownThread.Abort ();
+			if (countDownThread != null && countDownThread.IsAlive) {
+				cd.RequestStop ();
+			}
+
+			//Init a new counter
+			cd = new CountDown (time, CountdownLabel, InfoLabel);
 
 			//Start the countdown
 			countDownThread = new Thread( new ThreadStart (cd.Start) );
@@ -148,7 +150,10 @@ namespace TeaTimer
 	{
 		TimeSpan time;
 		NSTextField countdownLabel;
-		NSTextField infoLabel;
+		NSTextField infoLabel; 
+
+		//Volatile means that this member can be modified by multiple threads
+		private volatile bool pleaseStop; 
 
 		public CountDown(TimeSpan time, NSTextField countdownLabel, NSTextField infoLabel)
 		{
@@ -163,21 +168,41 @@ namespace TeaTimer
 		/// </summary>
 		/// <author>Alexandra Marin</author>
 		public void Start()
-		{
+		{ 
 			while (time.Seconds > 0) 
 			{
-				countdownLabel.InvokeOnMainThread( () => {
-					countdownLabel.StringValue = time.ToString();
+				//Break the loop if the stop command was given
+				if (pleaseStop) 
+					break;
+
+				//Update display
+				countdownLabel.InvokeOnMainThread (() => {
+					countdownLabel.StringValue = time.ToString ();
 				});
 
+				//Substract a second
 				Thread.Sleep (1000);
 				time = time.Subtract (new TimeSpan (0, 0, 1));
 			} 
 
+			//If the thread naturally finished, update the display with a "done" message
 			infoLabel.InvokeOnMainThread (() => {
-				countdownLabel.StringValue = "";
-				infoLabel.StringValue = "Tea is ready!";
-			});
+				if(!pleaseStop)
+				{
+					infoLabel.StringValue = "Tea is ready!";
+					countdownLabel.StringValue = "";
+				}
+			}); 
+		} 
+
+		/// <summary>
+		/// Requests the countdown to stop gracefully.
+		/// Called from outside this thread.
+		/// </summary>
+		/// <author>Alexandra Marin</author>
+		public void RequestStop()
+		{
+			pleaseStop = true;
 		} 
 	};
 }
