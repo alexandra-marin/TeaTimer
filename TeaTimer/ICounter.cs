@@ -5,7 +5,7 @@ namespace TeaTimer
 	public interface ICounter
 	{
 		void Start();
-		void RequestStop();
+		void Stop();
 	}
 }
 

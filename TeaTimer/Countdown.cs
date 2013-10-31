@@ -9,7 +9,7 @@ namespace TeaTimer
 	/// It will run on a separate thread.
 	/// </summary>
 	/// <author>Alexandra Marin</author>
-	public class CountDown : ICounter
+	public class Countdown : ICounter
 	{
 		TimeSpan time;
 		NSTextField countdownLabel;
@@ -18,7 +18,7 @@ namespace TeaTimer
 		//Volatile means that this member can be modified by multiple threads
 		private volatile bool pleaseStop; 
 
-		public CountDown(TimeSpan time, NSTextField countdownLabel, NSTextField infoLabel)
+		public Countdown(TimeSpan time, NSTextField countdownLabel, NSTextField infoLabel)
 		{
 			this.time = time;
 			this.countdownLabel = countdownLabel;
@@ -60,7 +60,7 @@ namespace TeaTimer
 		/// Called from outside this thread.
 		/// </summary>
 		/// <author>Alexandra Marin</author>
-		public void RequestStop()
+		public void Stop()
 		{
 			pleaseStop = true;
 		} 

@@ -86,11 +86,11 @@ namespace TeaTimer
 
 			//Close any running threads
 			if (countDownThread != null && countDownThread.IsAlive) {
-				cd.RequestStop ();
+				cd.Stop ();
 			}
 
 			//Init a new counter
-			cd = new CountDown (time, CountdownLabel, InfoLabel);
+			cd = new Countdown (time, CountdownLabel, InfoLabel);
 
 			//Start the countdown
 			countDownThread = new Thread( new ThreadStart (cd.Start) );
