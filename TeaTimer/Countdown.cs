@@ -11,16 +11,18 @@ namespace TeaTimer
 	/// <author>Alexandra Marin</author>
 	public class Countdown : ICounter
 	{
-		TimeSpan time;
-		NSTextField countdownLabel;
-		NSTextField infoLabel; 
+		private TimeSpan time;
+		private TimeSpan timeUnit;
+		private NSTextField countdownLabel;
+		private NSTextField infoLabel; 
 
-		//Volatile means that this member can be modified by multiple threads
+		//This member will be modified by multiple threads
 		private volatile bool pleaseStop; 
 
 		public Countdown(TimeSpan time, NSTextField countdownLabel, NSTextField infoLabel)
 		{
 			this.time = time;
+			this.timeUnit = new TimeSpan (0, 0, 1);
 			this.countdownLabel = countdownLabel;
 			this.infoLabel = infoLabel;
 		}
@@ -38,22 +40,44 @@ namespace TeaTimer
 				if (pleaseStop) 
 					return;
 
-				//Update display
-				countdownLabel.InvokeOnMainThread (() => {
-					countdownLabel.StringValue = time.ToString ();
-				});
-
-				//Substract a second
-				Thread.Sleep (1000);
-				time = time.Subtract (new TimeSpan (0, 0, 1));
+				UpdateCountdownLabel (); 
+				UpdateCounter ();
 			} 
 
-			//If the thread naturally finished, update the display with a "done" message
-			infoLabel.InvokeOnMainThread (() => {
+			ShowDoneMessage ();
+		} 
+
+		/// <summary>
+		/// Updates the UI countdown label from a background thread
+		/// </summary>
+		private void UpdateCountdownLabel ()
+		{
+			countdownLabel.InvokeOnMainThread (() =>  {
+				countdownLabel.StringValue = time.ToString ();
+			});
+		}
+
+		/// <summary>
+		/// Substract a second.
+		/// </summary>
+		private void UpdateCounter ()
+		{
+			Thread.Sleep (timeUnit);
+			time = time.Subtract (timeUnit);
+		}
+
+		/// <summary>
+		/// If the thread naturally finished, update the display with a "done" message
+		/// and clear the countdown label.
+		/// Will be called from background thread.
+		/// </summary>
+		void ShowDoneMessage ()
+		{ 
+			infoLabel.InvokeOnMainThread (() =>  {
 				infoLabel.StringValue = "Tea is ready!";
 				countdownLabel.StringValue = "";
-			}); 
-		} 
+			});
+		}
 
 		/// <summary>
 		/// Requests the countdown to stop gracefully.
