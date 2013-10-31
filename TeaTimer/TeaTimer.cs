@@ -9,7 +9,8 @@ namespace TeaTimer
 {
 	public partial class TeaTimerWindowController : MonoMac.AppKit.NSWindowController
 	{
-		Dictionary<string, TimeSpan> teaOptions;
+	//	Dictionary<string, TimeSpan> teaOptions;
+		List<Tea> teaOptions;
 		Thread countDownThread = null;
 		CountDown cd = null;
 
@@ -63,15 +64,16 @@ namespace TeaTimer
 		/// <author>Alexandra Marin</author>
 		void DefineTeaVarieties ()
 		{
-			teaOptions = new Dictionary<string, TimeSpan>();
-			teaOptions.Add ( 
-			                "Green Tea", 
-			                new TimeSpan (0, 0, 10) 
-			                );
-			teaOptions.Add ( 
-			                "Black Tea", 
-			                new TimeSpan (0, 0, 5) 
-			                );
+			//teaOptions = new Dictionary<string, TimeSpan>();
+			teaOptions = new List<Tea> ();
+			teaOptions.Add ( new Tea() {
+			    Name = "Green Tea", 
+				Duration = new TimeSpan (0, 0, 10) 
+							});
+			teaOptions.Add ( new Tea() {
+				Name = "Black Tea", 
+				Duration =  new TimeSpan (0, 0, 5) 
+			});
 		}
 
 		/// <summary>
@@ -82,7 +84,7 @@ namespace TeaTimer
 		void InitComboBox ()
 		{
 			TeaChoicesCombo.UsesDataSource = true;
-			TeaChoicesCombo.DataSource = new TeaVarieties (teaOptions.Keys.ToList ());
+			TeaChoicesCombo.DataSource = new TeaVarieties (teaOptions.Select(tea => tea.Name).ToList ());
 			TeaChoicesCombo.SelectItem (0);
 			TeaChoicesCombo.Editable = false;
 		}
@@ -96,9 +98,9 @@ namespace TeaTimer
 		{  
 			InfoLabel.StringValue = "";
 
-			//Get the time
-			string variety = TeaChoicesCombo.DataSource.ObjectValueForItem (TeaChoicesCombo, TeaChoicesCombo.SelectedIndex).ToString();
-			TimeSpan time = teaOptions[variety];
+			//Get the time 
+			string varietyName = TeaChoicesCombo.DataSource.ObjectValueForItem (TeaChoicesCombo, TeaChoicesCombo.SelectedIndex).ToString(); //"Green tea"
+			TimeSpan time = teaOptions.First(tea => tea.Name == varietyName).Duration;
 
 			//Close any running threads
 			if (countDownThread != null && countDownThread.IsAlive) {
