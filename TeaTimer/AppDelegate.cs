@@ -8,7 +8,7 @@ namespace TeaTimer
 {
 	public partial class AppDelegate : NSApplicationDelegate
 	{
-		MainWindowController mainWindowController;
+		TeaTimerWindowController teaTimerWindowController;
 
 		public AppDelegate ()
 		{
@@ -16,8 +16,8 @@ namespace TeaTimer
 
 		public override void FinishedLaunching (NSObject notification)
 		{
-			mainWindowController = new MainWindowController ();
-			mainWindowController.Window.MakeKeyAndOrderFront (this);
+			teaTimerWindowController = new TeaTimerWindowController ();
+			teaTimerWindowController.Window.MakeKeyAndOrderFront (this);
 		}
 	}
 }

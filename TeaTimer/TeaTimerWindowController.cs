@@ -10,7 +10,7 @@ using System.CodeDom.Compiler;
 namespace TeaTimer
 {
 	[Register ("MainWindowController")]
-	partial class MainWindowController
+	partial class TeaTimerWindowController
 	{
 		[Outlet]
 		MonoMac.AppKit.NSTextField CountdownLabel { get; set; }
