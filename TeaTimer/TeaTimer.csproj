@@ -87,6 +87,7 @@
     <Compile Include="TeaViewModel.cs" />
     <Compile Include="ITeaList.cs" />
     <Compile Include="TeaList.cs" />
+    <Compile Include="ICounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainWindow.xib" />

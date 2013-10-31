@@ -9,9 +9,9 @@ namespace TeaTimer
 {
 	public partial class TeaTimerWindowController : MonoMac.AppKit.NSWindowController
 	{ 
-		Thread countDownThread = null;
-		CountDown cd = null;
 		ITeaList<Tea> teaOptions;
+		Thread countDownThread = null;
+		ICounter cd = null;
 
 		#region Constructors
 
@@ -46,8 +46,7 @@ namespace TeaTimer
 		}
 
 		public override void AwakeFromNib ()
-		{
-			
+		{ 
 			teaOptions = new TeaList();
 			teaOptions.DefineTeaVarieties ();
 

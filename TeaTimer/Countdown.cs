@@ -9,7 +9,7 @@ namespace TeaTimer
 	/// It will run on a separate thread.
 	/// </summary>
 	/// <author>Alexandra Marin</author>
-	public class CountDown
+	public class CountDown : ICounter
 	{
 		TimeSpan time;
 		NSTextField countdownLabel;
