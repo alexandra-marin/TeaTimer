@@ -27,6 +27,22 @@ namespace TeaTimer
 		{
 			return teaOptions.First (tea => tea.Name == teaName).Duration;
 		}
+ 
+		/// <summary>
+		/// Defines the tea varieties and their durations
+		/// </summary>
+		/// <author>Alexandra Marin</author>
+		public void DefineTeaVarieties ()
+		{
+			teaOptions.Add ( new Tea() {
+				Name = "Green Tea", 
+				Duration = new TimeSpan (0, 0, 10) 
+			});
+			teaOptions.Add ( new Tea() {
+				Name = "Black Tea", 
+				Duration =  new TimeSpan (0, 0, 5) 
+			});
+		}
 	}
 }
 

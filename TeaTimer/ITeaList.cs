@@ -8,6 +8,7 @@ namespace TeaTimer
 		void Add(Tea tea);
 		List<string> GetTeaNameList();
 		TimeSpan GetDurationForTea (string teaName);
+		void DefineTeaVarieties ();
 	}
 }
 

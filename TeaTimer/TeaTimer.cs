@@ -9,9 +9,9 @@ namespace TeaTimer
 {
 	public partial class TeaTimerWindowController : MonoMac.AppKit.NSWindowController
 	{ 
-		ITeaList<Tea> teaOptions;
 		Thread countDownThread = null;
 		CountDown cd = null;
+		ITeaList<Tea> teaOptions;
 
 		#region Constructors
 
@@ -47,7 +47,9 @@ namespace TeaTimer
 
 		public override void AwakeFromNib ()
 		{
-			DefineTeaVarieties ();
+			
+			teaOptions = new TeaList();
+			teaOptions.DefineTeaVarieties ();
 
 			InitComboBox ();
 
@@ -55,24 +57,6 @@ namespace TeaTimer
 			StartButton.Activated += (object sender, EventArgs e) => {
 				StartCountDown ();
 			};
-		}
-
-		/// <summary>
-		/// Defines the tea varieties and their durations
-		/// </summary>
-		/// <author>Alexandra Marin</author>
-		void DefineTeaVarieties ()
-		{
-			//teaOptions = new Dictionary<string, TimeSpan>();
-			teaOptions = new TeaList();
-			teaOptions.Add ( new Tea() {
-			    Name = "Green Tea", 
-				Duration = new TimeSpan (0, 0, 10) 
-							});
-			teaOptions.Add ( new Tea() {
-				Name = "Black Tea", 
-				Duration =  new TimeSpan (0, 0, 5) 
-			});
 		}
 
 		/// <summary>
