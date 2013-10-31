@@ -8,9 +8,8 @@ using System.Threading;
 namespace TeaTimer
 {
 	public partial class TeaTimerWindowController : MonoMac.AppKit.NSWindowController
-	{
-	//	Dictionary<string, TimeSpan> teaOptions;
-		List<Tea> teaOptions;
+	{ 
+		ITeaList<Tea> teaOptions;
 		Thread countDownThread = null;
 		CountDown cd = null;
 
@@ -65,7 +64,7 @@ namespace TeaTimer
 		void DefineTeaVarieties ()
 		{
 			//teaOptions = new Dictionary<string, TimeSpan>();
-			teaOptions = new List<Tea> ();
+			teaOptions = new TeaList();
 			teaOptions.Add ( new Tea() {
 			    Name = "Green Tea", 
 				Duration = new TimeSpan (0, 0, 10) 
@@ -84,7 +83,7 @@ namespace TeaTimer
 		void InitComboBox ()
 		{
 			TeaChoicesCombo.UsesDataSource = true;
-			TeaChoicesCombo.DataSource = new TeaVarieties (teaOptions.Select(tea => tea.Name).ToList ());
+			TeaChoicesCombo.DataSource = new TeaVarieties (teaOptions.GetTeaNameList());
 			TeaChoicesCombo.SelectItem (0);
 			TeaChoicesCombo.Editable = false;
 		}
@@ -100,7 +99,7 @@ namespace TeaTimer
 
 			//Get the time 
 			string varietyName = TeaChoicesCombo.DataSource.ObjectValueForItem (TeaChoicesCombo, TeaChoicesCombo.SelectedIndex).ToString(); //"Green tea"
-			TimeSpan time = teaOptions.First(tea => tea.Name == varietyName).Duration;
+			TimeSpan time = teaOptions.GetDurationForTea(varietyName);
 
 			//Close any running threads
 			if (countDownThread != null && countDownThread.IsAlive) {
