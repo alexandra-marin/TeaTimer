@@ -11,6 +11,7 @@ namespace TeaTimer
 	/// <author>Alexandra Marin</author>
 	public class Countdown : ICounter
 	{
+		public Thread CountdownThread = null;
 		private TimeSpan time;
 		private TimeSpan timeUnit;
 		private NSTextField countdownLabel;
@@ -18,6 +19,17 @@ namespace TeaTimer
 
 		//This member will be modified by multiple threads
 		private volatile bool pleaseStop; 
+
+		public void Start()
+		{
+			CountdownThread = new Thread( new ThreadStart (this.StartCounting) );
+			CountdownThread.Start ();
+		}
+
+		public Thread GetCountdownThread()
+		{
+			return CountdownThread;
+		}
 
 		public Countdown(TimeSpan time, NSTextField countdownLabel, NSTextField infoLabel)
 		{
@@ -32,7 +44,7 @@ namespace TeaTimer
 		/// Counts down from the provided time and displays the current time in a label.
 		/// </summary>
 		/// <author>Alexandra Marin</author>
-		public void Start()
+		public void StartCounting()
 		{ 
 			while (time.Seconds > 0) 
 			{

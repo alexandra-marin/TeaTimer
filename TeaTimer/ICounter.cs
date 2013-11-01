@@ -1,10 +1,13 @@
 using System;
+using System.Threading; 
 
 namespace TeaTimer
 {
 	public interface ICounter
 	{
-		void Start();
+		Thread GetCountdownThread();
+		void Start ();
+		void StartCounting();
 		void Stop();
 	}
 }
