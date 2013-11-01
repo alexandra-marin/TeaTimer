@@ -54,7 +54,7 @@ namespace TeaTimer
 			//Set the Start Button behaviour
 			StartButton.Activated += (object sender, EventArgs e) => {
 				InfoLabel.StringValue = "";
-				StopPreviousCounter (); //If another countdown is running, stop it and start a new one
+				StopPreviousCounter (); //If another countdown is running, stop it before starting a new one
 				StartNewCountdown ();
 			};
 		}

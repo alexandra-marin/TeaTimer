@@ -10,7 +10,7 @@ namespace TeaTimer
 	/// Each entry in the varieties list is an option in the dropdown.
 	/// </summary>
 	/// <author>Alexandra Marin</author>
-	class TeaVarieties : NSComboBoxDataSource
+	public class TeaVarieties : NSComboBoxDataSource
 	{ 
 		List<string> varieties;
 

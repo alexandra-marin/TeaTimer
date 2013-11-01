@@ -7,7 +7,6 @@ namespace TeaTimer
 	{
 		Thread GetCountdownThread();
 		void Start ();
-		void StartCounting();
 		void Stop();
 	}
 }

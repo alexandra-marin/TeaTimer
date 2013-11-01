@@ -19,18 +19,7 @@ namespace TeaTimer
 
 		//This member will be modified by multiple threads
 		private volatile bool pleaseStop; 
-
-		public void Start()
-		{
-			CountdownThread = new Thread( new ThreadStart (this.StartCounting) );
-			CountdownThread.Start ();
-		}
-
-		public Thread GetCountdownThread()
-		{
-			return CountdownThread;
-		}
-
+		
 		public Countdown(TimeSpan time, NSTextField countdownLabel, NSTextField infoLabel)
 		{
 			this.time = time;
@@ -39,12 +28,25 @@ namespace TeaTimer
 			this.infoLabel = infoLabel;
 		}
 
+		#region Thread, Start and Stop
+
+		public Thread GetCountdownThread()
+		{
+			return CountdownThread;
+		}
+
+		public void Start()
+		{
+			CountdownThread = new Thread( new ThreadStart (this.StartCounting) );
+			CountdownThread.Start ();
+		}
+
 		/// <summary>
 		/// This method that will be called when the thread is started.
 		/// Counts down from the provided time and displays the current time in a label.
 		/// </summary>
 		/// <author>Alexandra Marin</author>
-		public void StartCounting()
+		private void StartCounting()
 		{ 
 			while (time.Seconds > 0) 
 			{
@@ -59,6 +61,19 @@ namespace TeaTimer
 			ShowDoneMessage ();
 		} 
 
+		/// <summary>
+		/// Requests the countdown to stop gracefully.
+		/// Called from outside this thread.
+		/// </summary>
+		/// <author>Alexandra Marin</author>
+		public void Stop()
+		{
+			pleaseStop = true;
+		} 
+
+		#endregion
+
+		#region Compute and Update
 		/// <summary>
 		/// Updates the UI countdown label from a background thread
 		/// </summary>
@@ -89,17 +104,9 @@ namespace TeaTimer
 				infoLabel.StringValue = "Tea is ready!";
 				countdownLabel.StringValue = "";
 			});
-		}
+   		}
 
-		/// <summary>
-		/// Requests the countdown to stop gracefully.
-		/// Called from outside this thread.
-		/// </summary>
-		/// <author>Alexandra Marin</author>
-		public void Stop()
-		{
-			pleaseStop = true;
-		} 
+		#endregion
 	};
 }
 
