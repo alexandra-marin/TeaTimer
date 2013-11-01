@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TeaTimer
 {
-	public class TeaList : ITeaList<Tea>
+	public class TeaList : ITeaList
 	{
 		private List<Tea> teaOptions;
 
@@ -18,7 +18,7 @@ namespace TeaTimer
 			teaOptions.Add (tea);
 		}
 
-		public List<string> GetTeaNameList()
+		public List<string> GetTeaNamesList()
 		{
 			return teaOptions.Select (tea => tea.Name).ToList ();
 		}

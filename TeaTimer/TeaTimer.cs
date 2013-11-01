@@ -9,7 +9,7 @@ namespace TeaTimer
 {
 	public partial class TeaTimerWindowController : MonoMac.AppKit.NSWindowController
 	{ 
-		ITeaList<Tea> teaOptions;
+		ITeaList teaOptions;
 		Thread countDownThread = null;
 		ICounter cd = null;
 
@@ -66,7 +66,7 @@ namespace TeaTimer
 		void InitComboBox ()
 		{
 			TeaChoicesCombo.UsesDataSource = true;
-			TeaChoicesCombo.DataSource = new TeaVarieties (teaOptions.GetTeaNameList());
+			TeaChoicesCombo.DataSource = new TeaVarieties (teaOptions.GetTeaNamesList());
 			TeaChoicesCombo.SelectItem (0);
 			TeaChoicesCombo.Editable = false;
 		}

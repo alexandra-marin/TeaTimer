@@ -82,12 +82,13 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="TeaTimer.cs" />
-    <Compile Include="TeaVarieties.cs" />
     <Compile Include="Countdown.cs" />
     <Compile Include="TeaViewModel.cs" />
     <Compile Include="ITeaList.cs" />
     <Compile Include="TeaList.cs" />
     <Compile Include="ICounter.cs" />
+    <Compile Include="ITeaDataSource.cs" />
+    <Compile Include="TeaVarieties.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainWindow.xib" />

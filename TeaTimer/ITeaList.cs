@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace TeaTimer
 {
-	public interface ITeaList<Tea>
+	public interface ITeaList
 	{
 		void Add(Tea tea);
-		List<string> GetTeaNameList();
+		List<string> GetTeaNamesList();
 		TimeSpan GetDurationForTea (string teaName);
 		void DefineTeaVarieties ();
 	}
