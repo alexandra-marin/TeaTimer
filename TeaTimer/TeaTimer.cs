@@ -10,7 +10,7 @@ namespace TeaTimer
 	public partial class TeaTimerWindowController : MonoMac.AppKit.NSWindowController
 	{ 
 		ITeaList teaOptions;
-		ICounter cd = null;
+		ICounter countdown = null;
 
 		#region Constructors
 
@@ -67,7 +67,7 @@ namespace TeaTimer
 		void InitComboBox ()
 		{
 			TeaChoicesCombo.UsesDataSource = true;
-			TeaChoicesCombo.DataSource = new TeaVarieties (teaOptions.GetTeaNamesList());
+			TeaChoicesCombo.DataSource = teaOptions.CreateDataSourceFromTeaNameList ();
 			TeaChoicesCombo.SelectItem (0);
 			TeaChoicesCombo.Editable = false;
 		}
@@ -78,8 +78,8 @@ namespace TeaTimer
 		/// <author>Alexandra Marin</author>
 		void StopPreviousCounter ()
 		{ 
-			if (cd != null && cd.GetCountdownThread() != null && cd.GetCountdownThread().IsAlive) {
-				cd.Stop ();
+			if (countdown != null && countdown.GetCountdownThread() != null && countdown.GetCountdownThread().IsAlive) {
+				countdown.Stop ();
 			}
 		}
 
@@ -95,8 +95,8 @@ namespace TeaTimer
 			TimeSpan time = teaOptions.GetDurationForTea(varietyName);
 
 			//Init a new counter
-			cd = new Countdown (time, CountdownLabel, InfoLabel);
-			cd.Start ();
+			countdown = new Countdown (time, CountdownLabel, InfoLabel);
+			countdown.Start ();
 		}
 	}
 }

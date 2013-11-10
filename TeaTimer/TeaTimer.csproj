@@ -87,7 +87,6 @@
     <Compile Include="ITeaList.cs" />
     <Compile Include="TeaList.cs" />
     <Compile Include="ICounter.cs" />
-    <Compile Include="ITeaDataSource.cs" />
     <Compile Include="TeaVarieties.cs" />
   </ItemGroup>
   <ItemGroup>

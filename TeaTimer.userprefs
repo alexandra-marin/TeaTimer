@@ -1,15 +1,23 @@
-﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="10/31/2013 22:02:28">
+﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="11/10/2013 16:27:40">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TeaTimer/MainWindowController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TeaTimer/ICounter.cs">
     <Files>
-      <File FileName="TeaTimer/AppDelegate.cs" Line="1" Column="1" />
-      <File FileName="TeaTimer/MainWindowController.cs" Line="34" Column="18" />
+      <File FileName="TeaTimer/TeaTimer.cs" Line="50" Column="29" />
+      <File FileName="TeaTimer/Countdown.cs" Line="69" Column="3" />
+      <File FileName="TeaTimer/ITeaDataSource.cs" Line="1" Column="1" />
+      <File FileName="TeaTimer/TeaVarieties.cs" Line="27" Column="79" />
+      <File FileName="TeaTimer/ICounter.cs" Line="1" Column="1" />
+      <File FileName="TeaTimer/Info.plist" />
+      <File FileName="TeaTimer/ITeaList.cs" Line="6" Column="2" />
+      <File FileName="TeaTimer/Main.cs" Line="1" Column="1" />
+      <File FileName="TeaTimer/TeaList.cs" Line="45" Column="4" />
+      <File FileName="TeaTimer/TeaViewModel.cs" Line="14" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="TeaTimer" expanded="True">
-            <Node name="MainWindowController.cs" selected="True" />
+            <Node name="ICounter.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -18,12 +26,7 @@
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State>
-          <Value>TeaChoicesCombo.SelectedValue</Value>
-          <Value>TeaChoicesCombo</Value>
-          <Value>teaOptions["Green Tea"]</Value>
-          <Value>teaOptions.Keys.ToLookup()</Value>
-          <Value>teaOptions.Keys.ToList()</Value>
-          <Value>teaOptions.Keys.ToArray()</Value>
+          <Value>variety</Value>
         </State>
       </Pad>
       <Pad Id="ConnectionManagerPad">

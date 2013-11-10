@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MonoMac.AppKit;
 
 namespace TeaTimer
 {
@@ -18,9 +19,14 @@ namespace TeaTimer
 			teaOptions.Add (tea);
 		}
 
-		public List<string> GetTeaNamesList()
+		private List<string> GetTeaNamesList()
 		{
 			return teaOptions.Select (tea => tea.Name).ToList ();
+		}
+
+		public NSComboBoxDataSource CreateDataSourceFromTeaNameList()
+		{
+			return new TeaVarieties (GetTeaNamesList ());
 		}
 
 		public TimeSpan GetDurationForTea(string teaName)
