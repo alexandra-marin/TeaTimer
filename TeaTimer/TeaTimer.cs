@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic; 
 using MonoMac.Foundation;
 using MonoMac.AppKit;
 using System.Threading;
@@ -71,9 +70,9 @@ namespace TeaTimer
 		void InitComboBox ()
 		{
 			TeaChoicesCombo.UsesDataSource = true;
+			TeaChoicesCombo.Editable = false;
 			TeaChoicesCombo.DataSource = teaOptions.CreateDataSourceFromTeaNameList ();
 			TeaChoicesCombo.SelectItem (0);
-			TeaChoicesCombo.Editable = false;
 		}
 
 		/// <summary>

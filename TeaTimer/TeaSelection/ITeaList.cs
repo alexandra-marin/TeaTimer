@@ -5,11 +5,10 @@ using MonoMac.AppKit;
 namespace TeaTimer
 {
 	public interface ITeaList
-	{
-		void Add(Tea tea);
+	{ 
+		void DefineTeaVarieties ();
 		NSComboBoxDataSource CreateDataSourceFromTeaNameList ();
 		TimeSpan GetDurationForTea (string teaName);
-		void DefineTeaVarieties ();
 	}
 }
 

@@ -1,20 +1,17 @@
-﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="11/11/2013 17:54:36">
+﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="11/11/2013 19:50:58">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TeaTimer/TeaVarieties.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TeaTimer/TeaTimer.cs">
     <Files>
-      <File FileName="TeaTimer/TeaTimer.cs" Line="70" Column="51" />
-      <File FileName="TeaTimer/TeaVarieties.cs" Line="17" Column="3" />
-      <File FileName="TeaTimer/TeaList.cs" Line="29" Column="19" />
-      <File FileName="TeaTimer/Countdown.cs" Line="1" Column="1" />
-      <File FileName="TeaTimer/Info.plist" />
-      <File FileName="TeaTimer/TeaViewModel.cs" Line="1" Column="1" />
-      <File FileName="TeaTimer/Main.cs" Line="1" Column="1" />
+      <File FileName="TeaTimer/TeaTimer.cs" Line="60" Column="73" />
+      <File FileName="TeaTimer/Timer/Countdown.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
+        <State expanded="True" selected="True">
           <Node name="TeaTimer" expanded="True">
-            <Node name="TeaVarieties.cs" selected="True" />
+            <Node name="TeaSelection" expanded="True" />
+            <Node name="Timer" expanded="True" />
+            <Node name="View" expanded="True" />
           </Node>
         </State>
       </Pad>

@@ -14,26 +14,6 @@ namespace TeaTimer
 			teaOptions = new List<Tea> ();
 		}
 
-		public void Add(Tea tea)
-		{
-			teaOptions.Add (tea);
-		}
-
-		private List<string> GetTeaNamesList()
-		{
-			return teaOptions.Select (tea => tea.Name).ToList ();
-		}
-
-		public NSComboBoxDataSource CreateDataSourceFromTeaNameList()
-		{
-			return new TeaVarieties (GetTeaNamesList ());
-		}
-
-		public TimeSpan GetDurationForTea(string teaName)
-		{
-			return teaOptions.First (tea => tea.Name == teaName).Duration;
-		}
- 
 		/// <summary>
 		/// Defines the tea varieties and their durations
 		/// </summary>
@@ -48,6 +28,26 @@ namespace TeaTimer
 				Name = "Black Tea", 
 				Duration =  new TimeSpan (0, 0, 5) 
 			});
+		}
+
+		private void Add(Tea tea)
+		{
+			teaOptions.Add (tea);
+   		}
+
+		public NSComboBoxDataSource CreateDataSourceFromTeaNameList()
+		{
+			return new TeaVarieties (GetTeaNamesList ());
+		}
+
+		private List<string> GetTeaNamesList()
+		{
+			return teaOptions.Select (tea => tea.Name).ToList ();
+		}
+
+		public TimeSpan GetDurationForTea(string teaName)
+		{
+			return teaOptions.First (tea => tea.Name == teaName).Duration;
 		}
 	}
 }
