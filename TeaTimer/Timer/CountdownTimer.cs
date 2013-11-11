@@ -4,7 +4,7 @@ using MonoMac.AppKit;
 
 namespace TeaTimer
 {
-	public class CountdownTimer : ICountdownTimer
+	public class CountdownTimer : ITimer
 	{
 		public Thread countdownThread = null;
 		private ICounter counter;
@@ -14,6 +14,10 @@ namespace TeaTimer
 			counter = new Countdown (time, countdownLabel, infoLabel);
 		}
 		 
+		/// <summary>
+		/// Starts the countdown.
+		/// </summary>
+		/// <author> Alexandra Marin </author>
 		public void Start()
 		{
 			countdownThread = new Thread( new ThreadStart (counter.StartCounting) );
@@ -30,6 +34,9 @@ namespace TeaTimer
 			counter.RequestStop (); 
 		} 
 
+		/// <summary> Checks if the counter thread is active </summary>
+		/// <returns> Thread state </returns>
+		/// <author> Alexandra Marin </author>
 		public bool IsRunning ()
 		{ 
 			return countdownThread != null & countdownThread.IsAlive; 

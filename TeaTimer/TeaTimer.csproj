@@ -70,30 +70,32 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Timer\" />
+    <Folder Include="TeaSelection\" />
+    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="AppDelegate.designer.cs">
       <DependentUpon>AppDelegate.cs</DependentUpon>
     </Compile>
-    <Compile Include="TeaTimerWindowController.cs">
+    <Compile Include="TeaTimer.cs" />
+    <Compile Include="Timer\Countdown.cs" />
+    <Compile Include="Timer\CountdownTimer.cs" />
+    <Compile Include="Timer\ICounter.cs" />
+    <Compile Include="Timer\ITimer.cs" />
+    <Compile Include="TeaSelection\TeaList.cs" />
+    <Compile Include="TeaSelection\TeaVarieties.cs" />
+    <Compile Include="TeaSelection\TeaViewModel.cs" />
+    <Compile Include="TeaSelection\ITeaList.cs" />
+    <Compile Include="View\MainWindow.cs" />
+    <Compile Include="View\TeaTimerWindowController.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="TeaTimer.cs" />
-    <Compile Include="Countdown.cs" />
-    <Compile Include="TeaViewModel.cs" />
-    <Compile Include="ITeaList.cs" />
-    <Compile Include="TeaList.cs" />
-    <Compile Include="ICounter.cs" />
-    <Compile Include="TeaVarieties.cs" />
-    <Compile Include="CountdownTimer.cs" />
-    <Compile Include="ICountdownTimer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="MainWindow.xib" />
-    <InterfaceDefinition Include="MainMenu.xib" />
+    <InterfaceDefinition Include="View\MainWindow.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

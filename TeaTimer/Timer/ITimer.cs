@@ -2,7 +2,7 @@ using System;
 
 namespace TeaTimer
 {
-	public interface ICountdownTimer
+	public interface ITimer
 	{
 		void Start();
 		void Stop();

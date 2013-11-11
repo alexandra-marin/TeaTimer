@@ -10,7 +10,7 @@ namespace TeaTimer
 	public partial class TeaTimerWindowController : MonoMac.AppKit.NSWindowController
 	{ 
 		ITeaList teaOptions;
-		ICountdownTimer timer = null;
+		ITimer timer = null;
 
 		#region Constructors
 
