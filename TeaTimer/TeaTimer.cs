@@ -10,7 +10,7 @@ namespace TeaTimer
 	public partial class TeaTimerWindowController : MonoMac.AppKit.NSWindowController
 	{ 
 		ITeaList teaOptions;
-		ICounter countdown = null;
+		ICountdownTimer timer = null;
 
 		#region Constructors
 
@@ -53,9 +53,13 @@ namespace TeaTimer
 
 			//Set the Start Button behaviour
 			StartButton.Activated += (object sender, EventArgs e) => {
+				// Reset labels
 				InfoLabel.StringValue = "";
-				StopPreviousCounter (); //If another countdown is running, stop it before starting a new one
-				StartNewCountdown ();
+				CountdownLabel.StringValue = "";
+
+				//If another countdown is running, stop it before starting a new one
+				StopPreviousTimer (); 
+				StartNewTimer ();
 			};
 		}
 
@@ -76,10 +80,10 @@ namespace TeaTimer
 		/// Checks for previous counters and closes any running threads
 		/// </summary>
 		/// <author>Alexandra Marin</author>
-		void StopPreviousCounter ()
+		void StopPreviousTimer ()
 		{ 
-			if (countdown != null && countdown.GetCountdownThread() != null && countdown.GetCountdownThread().IsAlive) {
-				countdown.Stop ();
+			if (timer != null && timer.IsRunning()) {
+				timer.Stop ();
 			}
 		}
 
@@ -88,15 +92,15 @@ namespace TeaTimer
 		/// Gets the time interval corresponding to the selected option in the combo
 		/// </summary>
 		/// <author>Alexandra Marin</author>
-		private void StartNewCountdown ()
+		private void StartNewTimer ()
 		{  
 			//Get the time 
 			string varietyName = TeaChoicesCombo.DataSource.ObjectValueForItem (TeaChoicesCombo, TeaChoicesCombo.SelectedIndex).ToString(); //"Green tea"
 			TimeSpan time = teaOptions.GetDurationForTea(varietyName);
 
 			//Init a new counter
-			countdown = new Countdown (time, CountdownLabel, InfoLabel);
-			countdown.Start ();
+			timer = new CountdownTimer (time, CountdownLabel, InfoLabel);
+			timer.Start ();
 		}
 	}
 }

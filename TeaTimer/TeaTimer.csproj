@@ -88,6 +88,8 @@
     <Compile Include="TeaList.cs" />
     <Compile Include="ICounter.cs" />
     <Compile Include="TeaVarieties.cs" />
+    <Compile Include="CountdownTimer.cs" />
+    <Compile Include="ICountdownTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainWindow.xib" />

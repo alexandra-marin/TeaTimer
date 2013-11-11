@@ -11,42 +11,26 @@ namespace TeaTimer
 	/// <author>Alexandra Marin</author>
 	public class Countdown : ICounter
 	{
-		public Thread CountdownThread = null;
 		private TimeSpan time;
 		private TimeSpan timeUnit;
 		private NSTextField countdownLabel;
-		private NSTextField infoLabel; 
-
-		//This member will be modified by multiple threads
-		private volatile bool pleaseStop; 
-		
+		private NSTextField infoLabel;  
+		private volatile bool pleaseStop; //This member will be modified by multiple threads
+	   
 		public Countdown(TimeSpan time, NSTextField countdownLabel, NSTextField infoLabel)
 		{
 			this.time = time;
-			this.timeUnit = new TimeSpan (0, 0, 1);
+			this.timeUnit = new TimeSpan (0, 0, 1); // Define basic time unit as one second
 			this.countdownLabel = countdownLabel;
-			this.infoLabel = infoLabel;
-		}
-
-		#region Thread, Start and Stop
-
-		public Thread GetCountdownThread()
-		{
-			return CountdownThread;
-		}
-
-		public void Start()
-		{
-			CountdownThread = new Thread( new ThreadStart (this.StartCounting) );
-			CountdownThread.Start ();
-		}
+			this.infoLabel = infoLabel; 
+		} 
 
 		/// <summary>
 		/// This method that will be called when the thread is started.
 		/// Counts down from the provided time and displays the current time in a label.
 		/// </summary>
 		/// <author>Alexandra Marin</author>
-		private void StartCounting()
+		public void StartCounting()
 		{ 
 			while (time.Seconds > 0) 
 			{
@@ -59,21 +43,18 @@ namespace TeaTimer
 			} 
 
 			ShowDoneMessage ();
-		} 
+		}  
 
 		/// <summary>
-		/// Requests the countdown to stop gracefully.
-		/// Called from outside this thread.
+		/// This method that will be called when the thread
+		/// needs to be stopped before it has completed its work.
 		/// </summary>
 		/// <author>Alexandra Marin</author>
-		public void Stop()
+		public void RequestStop()
 		{
 			pleaseStop = true;
 		} 
-
-		#endregion
-
-		#region Compute and Update
+ 
 		/// <summary>
 		/// Updates the UI countdown label from a background thread
 		/// </summary>
@@ -104,9 +85,7 @@ namespace TeaTimer
 				infoLabel.StringValue = "Tea is ready!";
 				countdownLabel.StringValue = "";
 			});
-   		}
-
-		#endregion
+   		} 
 	};
 }
 
