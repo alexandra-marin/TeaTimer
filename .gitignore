@@ -1,2 +1,6 @@
 TeaTimer/bin/
 TeaTimer/obj/
+
+#Visual Studio files
+.vs
+
